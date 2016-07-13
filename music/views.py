@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import Http404
 # Using django.shortcuts import render (For using templates shortcut)
 #from django.template import loader
 
@@ -22,6 +22,11 @@ def index(request):
 	return render(request, 'music/index.html', context)
 
 def details(request, album_id):
-	html = "<h1>This is Album no. : " + str(album_id) + "</h1>"
-	return HttpResponse(html)
+	# html = "<h1>This is Album no. : " + str(album_id) + "</h1>" ---> Using template now. 
+	# Using exception handling to catch the invalid request.
+	try:
+		album = Album.objects.get(pk=album_id)
+	except Album.DoesNotExist:
+		raise Http404("Album does not exist")
+	return render(request, 'music/details.html', { 'album': album })
 
