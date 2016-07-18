@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import Http404
+from django.shortcuts import render, get_object_or_404
+#from django.http import Http404 --> This is not required as we are using get_object_or_404
 # Using django.shortcuts import render (For using templates shortcut)
 #from django.template import loader
 
@@ -24,9 +24,13 @@ def index(request):
 def details(request, album_id):
 	# html = "<h1>This is Album no. : " + str(album_id) + "</h1>" ---> Using template now. 
 	# Using exception handling to catch the invalid request.
-	try:
-		album = Album.objects.get(pk=album_id)
-	except Album.DoesNotExist:
-		raise Http404("Album does not exist")
+
+
+	# There is a shortcut for try-except statement as well..Mentioned right below raise
+	# try:
+	# 	album = Album.objects.get(pk=album_id)
+	# except Album.DoesNotExist:
+	# 	raise Http404("Album does not exist")
+	album = get_object_or_404(Album, pk=album_id)
 	return render(request, 'music/details.html', { 'album': album })
 
