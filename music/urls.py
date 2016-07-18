@@ -8,5 +8,8 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
 
 	#/music/6559/
-	url(r'^(?P<album_id>[0-9]+)/$', views.details, name='details')
+	url(r'^(?P<album_id>[0-9]+)/$', views.details, name='details'),
+
+	#/music/6559/favorite
+	url(r'^(?P<album_id>[0-9]+)/favorite/$', views.favorite, name='favorite'),
 ]
