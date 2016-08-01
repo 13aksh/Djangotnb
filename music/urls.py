@@ -7,6 +7,9 @@ urlpatterns = [
 	#/music/
 	url(r'^$', views.Index.as_view(), name='index'),
 
+	#/music/register/
+	url(r'^register/$', views.UserFormView.as_view(), name='register'),
+
 	#/music/6559/
 	url(r'^(?P<pk>[0-9]+)/$', views.Details.as_view(), name='details'),
 

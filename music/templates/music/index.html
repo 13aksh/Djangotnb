@@ -5,7 +5,12 @@
 		<h1>List of all my Albums:</h1>
 		<ul>
 			{% for album in all_albums %}
-				<li><a href="{% url 'music:details' album.id %}">{{ album.album_title }}</a></li>
+				<li><a href="{% url 'music:details' album.id %}">{{ album.album_title }}</a> - 
+					<form action="{% url 'music:delete-album' album.id %}" method="post">
+						{% csrf_token %}
+						<input type="submit" name="submit" value="Delete">
+					</form>
+				</li>
 			{% endfor %}
 		</ul>
 	{% else %}
